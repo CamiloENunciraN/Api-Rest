@@ -1,0 +1,4 @@
+Instrucciones intalacion node
+comandos
+npm init --yes //inicializa el archivo package.json
+npm i express //intalacion del paquete express
