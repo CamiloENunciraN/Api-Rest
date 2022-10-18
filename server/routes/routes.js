@@ -2,12 +2,23 @@ const {Router}=require('express');
 const router=Router();
 
 
-router.get("/",(req,res)=>{  //se accede a travez de http://localhost:3000/
-res.sendFile(path.join(__dirname+"/server.html"));   //responde con el archivo server.html
+
+
+router.get("/peticion",(req,res)=>{  //para realizar una peticion    get/
+res.json({ tipo: 'get' });
+
 });
 
-router.get("/peticion",(req,res)=>{  //para realizar una peticion/
-res.json({ user: 'geek' });
+
+router.post("/peticion",(req,res)=>{  //para realizar una peticion    post/
+//	const   {nombres de variables}=req.body;
+res.json({ tipo: 'post' });    //retorna    un   archhhhihvo. json
 });
+
+router.delete("/:id",(req,res)=>{  //para realizar una peticion    delete/
+console.log(req.params);			//ver el parametro de la url
+res.status(200).send('eliminado');   //codigo 200 bien - codigo 500 error
+});
+
 
 module.exports=router;

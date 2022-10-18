@@ -17,4 +17,8 @@ console.log("Server Running on port",app.get('PORT')); ///imprime en consola el 
 });
 
 //routes
+app.get("/",(req,res)=>{  //se accede a travez de http://localhost:3000/
+res.sendFile(path.join(__dirname+"/server.html"));   //responde con el archivo server.html
+});
+
 app.use(require('./routes/routes'));   //recibe las rutas desde el archivo routes
