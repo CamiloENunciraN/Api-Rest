@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //conexión con la base de datos
-const {connection} = require("../config.db");
+const {connection} = require("./../configDB/config.db");
 
 const getCarta = (request, response) => {
     connection.query("SELECT * FROM Noticia", 
