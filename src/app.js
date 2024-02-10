@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname));
 
 //cargamos el archivo de rutas
-app.use(require('./routes/carta'));
+app.use(require('./routes/endpoints'));
 
 app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname,'./public/html/index.html'));

@@ -53,4 +53,20 @@ app.route("/carta/:id")
 .delete(delCarta);
 
 
+
+// Configurar el servidor para enviar actualizaciones a través de SSE
+const update = (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  
+  let c=0;
+  // Enviar actualizaciones cada 5 segundos (ejemplo)
+  setInterval(() => {
+    res.write(`data: Nueva actualización `+c+`\n\n`); // Enviar la actualización al cliente
+    c++;
+  }, 5000);
+}
+//ruta
+app.route("/update").get(update);
+
 module.exports = app;
