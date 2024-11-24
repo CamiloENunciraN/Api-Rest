@@ -10,31 +10,33 @@ const {connection} = require("./../configDB/config.db");
 const getCarta = (request, response) => {
     connection.query("SELECT * FROM Noticia", 
     (error, results) => {
-        if(error)
-            throw error;
-        response.status(200).json(results);
+        if(error){
+            response.status(200).json({'msg':'Ha ocurrido un error'});
+        }else{
+            response.status(200).json({'msg':'Busqueda realizada',
+                                        'results':results});
+        }
     });
 };
-
 //ruta
-app.route("/carta")
-.get(getCarta);
-
+app.route("/carta").get(getCarta);
 
 const postCarta = (request, response) => {
     const {plato, descripcion, precio, disponible} = request.body;
     connection.query("INSERT INTO carta(plato, descripcion, precio, disponible) VALUES (?,?,?,?) ", 
     [plato, descripcion, precio, disponible],
     (error, results) => {
-        if(error)
-            throw error;
-        response.status(201).json({"Item añadido correctamente": results.affectedRows});
+        if(error){
+            response.status(200).json({'msg':'Ha ocurrido un error'});
+        }else{
+            response.status(201).json({'msg':'Item añadido correctamente',
+                                        'results':results.affectedRows});
+        }
     });
 };
 
 //ruta
-app.route("/carta")
-.post(postCarta);
+app.route("/carta").post(postCarta);
 
 
 const delCarta = (request, response) => {
@@ -42,15 +44,16 @@ const delCarta = (request, response) => {
     connection.query("Delete from carta where id = ?", 
     [id],
     (error, results) => {
-        if(error)
-            throw error;
-        response.status(201).json({"Item eliminado":results.affectedRows});
+        if(error){
+            response.status(200).json({'msg':'Ha ocurrido un error'});
+        }else{
+            response.status(201).json({'msg':'Item eliminado correctamente',
+                                        'results':results.affectedRows});
+        }
     });
 };
-
 //ruta
-app.route("/carta/:id")
-.delete(delCarta);
+app.route("/carta/:id").delete(delCarta);
 
 
 
